@@ -6,7 +6,7 @@ const DEFAULT_NAV_ITEMS = [
     { label: 'Events', icon: 'event', to: '/events' },
     { label: 'Users', icon: 'group', to: '/users' },
     { label: 'Reports', icon: 'bar_chart', to: '/reports' },
-    { label: 'Settings', icon: 'settings', to: '/settings' },
+    // { label: 'Settings', icon: 'settings', to: '/settings' },
 ];
 
 const DEFAULT_USER = {
