@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import AssignTeamLeadModal from '../../components/AssignTeamLeadModal';
+
 const baseInput =
     'h-12 w-full rounded-xl border border-[#dfe5f3] bg-white px-4 text-sm font-medium text-[#1f2937] placeholder:text-[#9ca3af] shadow-[inset_0_1px_2px_rgba(15,23,42,0.08)] transition focus:border-[#3a80f5] focus:ring-4 focus:ring-[#3a80f5]/12 focus:outline-none';
 
@@ -23,6 +26,13 @@ function Section({ title, children }) {
 }
 
 function CreateEvents() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedTeamLead, setSelectedTeamLead] = useState(null);
+    const [eventName, setEventName] = useState('');
+
+    const handleAssign = (lead) => {
+        setSelectedTeamLead(lead);
+    };
     return (
         <div className="min-h-full px-6 pb-16 pt-8 md:px-10">
             <div className="mx-auto w-full max-w-5xl">
@@ -133,15 +143,46 @@ function CreateEvents() {
                                 </div>
 
                                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                                    <Field label="Assigned Team">
-                                        <select className={`${baseInput} appearance-none`} defaultValue="">
-                                            <option value="" disabled>
-                                                Select team
-                                            </option>
-                                            <option value="team_alpha">Team Alpha</option>
-                                            <option value="team_beta">Team Beta</option>
-                                            <option value="team_gamma">Team Gamma</option>
-                                        </select>
+                                    <Field label="Team Lead">
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                className={`${baseInput} cursor-pointer bg-white pr-10`}
+                                                placeholder="Select team lead"
+                                                value={selectedTeamLead ? selectedTeamLead.name : ''}
+                                                readOnly
+                                                onClick={() => setIsModalOpen(true)}
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsModalOpen(true)}
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-slate-600"
+                                            >
+                                                <span className="material-symbols-outlined">person_search</span>
+                                            </button>
+                                        </div>
+                                        {selectedTeamLead && (
+                                            <div className="mt-2 flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/5 p-3">
+                                                <img
+                                                    src={selectedTeamLead.avatar}
+                                                    alt={selectedTeamLead.name}
+                                                    className="size-8 rounded-full object-cover"
+                                                />
+                                                <div className="flex-1">
+                                                    <p className="text-sm font-medium text-slate-900">
+                                                        {selectedTeamLead.name}
+                                                    </p>
+                                                    <p className="text-xs text-slate-500">{selectedTeamLead.location}</p>
+                                                </div>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setSelectedTeamLead(null)}
+                                                    className="text-slate-400 transition hover:text-red-500"
+                                                >
+                                                    <span className="material-symbols-outlined text-lg">close</span>
+                                                </button>
+                                            </div>
+                                        )}
                                     </Field>
                                     <Field label="Rep at Location">
                                         <input className={baseInput} placeholder="Name of on-site representative" />
@@ -184,6 +225,14 @@ function CreateEvents() {
                     </form>
                 </div>
             </div>
+
+            {/* Assign Team Lead Modal */}
+            <AssignTeamLeadModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onAssign={handleAssign}
+                eventName={eventName || 'New Training Event'}
+            />
         </div>
     );
 }
