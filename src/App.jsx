@@ -7,13 +7,11 @@ import Dashboard from './pages/DashBoard/DashBoard.jsx';
 import Events from './pages/Events/Events.jsx';
 import CreateEvents from './pages/Events/CreateEvents.jsx';
 import EventDetails from './pages/Events/EventDetails.jsx';
+import Users from './pages/Users/Users.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 
 const ProtectedRoute = ({ children }) => children;
 const Login = () => <Placeholder title="Login" description="Authentication flow coming soon." />;
-const Users = () => (
-  <Placeholder title="Users" description="Manage users and assignments here." />
-);
 const Reports = () => (
   <Placeholder title="Reports" description="Visualize performance metrics and KPIs." />
 );
