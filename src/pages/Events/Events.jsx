@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import EventCard from '../../components/EventCard';
 
 const events = [
@@ -55,6 +56,8 @@ const filters = ['All', 'Pending', 'Assigned', 'Confirmed', 'Rescheduled', 'Canc
 const activeFilter = 'All';
 
 const Events = () => {
+    const navigate = useNavigate();
+
     return (
         <div className="px-8 py-10">
             <div className="flex flex-wrap items-center justify-between gap-4">
@@ -67,13 +70,14 @@ const Events = () => {
 
                 <div className="relative inline-flex">
                     <div className="absolute inset-0 -translate-y-1 translate-x-1 rounded-xl bg-primary/30 blur-md" />
-                    <a
-                        href="/events/create"
+                    <button
+                        type="button"
+                        onClick={() => navigate('/events/create')}
                         className="relative flex h-11 items-center justify-center gap-2 rounded-xl bg-[#137fec] px-6 text-sm font-semibold text-white shadow transition hover:bg-[#0f6ccd]"
                     >
                         <span className="material-symbols-outlined text-lg">add</span>
                         <span>Create Event</span>
-                    </a>
+                    </button>
                 </div>
             </div>
 
