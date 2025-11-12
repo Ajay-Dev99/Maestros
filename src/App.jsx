@@ -6,13 +6,11 @@ import Layout from './layouts/DashboardLayout.jsx';
 import Dashboard from './pages/DashBoard/DashBoard.jsx';
 import Events from './pages/Events/Events.jsx';
 import CreateEvents from './pages/Events/CreateEvents.jsx';
+import EventDetails from './pages/Events/EventDetails.jsx';
 import Placeholder from './pages/Placeholder.jsx';
 
 const ProtectedRoute = ({ children }) => children;
 const Login = () => <Placeholder title="Login" description="Authentication flow coming soon." />;
-const EventDetails = () => (
-  <Placeholder title="Event Details" description="Detailed view for event information." />
-);
 const Users = () => (
   <Placeholder title="Users" description="Manage users and assignments here." />
 );
