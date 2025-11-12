@@ -1,0 +1,88 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+@layer base {
+  body {
+    background-color: #eef2fb;
+    color: #0f172a;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: "Inter", sans-serif;
+  }
+
+  .text-primary {
+    color: #137fec;
+  }
+
+  .bg-primary {
+    background-color: #137fec;
+  }
+
+  .bg-primary\/10 {
+    background-color: rgba(19, 127, 236, 0.1);
+  }
+
+  .text-pending {
+    color: #f59e0b;
+  }
+
+  .bg-pending {
+    background-color: #f59e0b;
+  }
+
+  .bg-pending\/10 {
+    background-color: rgba(245, 158, 11, 0.14);
+  }
+
+  .text-assigned {
+    color: #3b82f6;
+  }
+
+  .bg-assigned {
+    background-color: #3b82f6;
+  }
+
+  .bg-assigned\/10 {
+    background-color: rgba(59, 130, 246, 0.14);
+  }
+
+  .text-confirmed {
+    color: #10b981;
+  }
+
+  .bg-confirmed {
+    background-color: #10b981;
+  }
+
+  .bg-confirmed\/10 {
+    background-color: rgba(16, 185, 129, 0.16);
+  }
+
+  .text-rescheduled {
+    color: #8b5cf6;
+  }
+
+  .bg-rescheduled {
+    background-color: #8b5cf6;
+  }
+
+  .bg-rescheduled\/10 {
+    background-color: rgba(139, 92, 246, 0.18);
+  }
+
+  .text-cancelled {
+    color: #ef4444;
+  }
+
+  .bg-cancelled {
+    background-color: #ef4444;
+  }
+
+  .bg-cancelled\/10 {
+    background-color: rgba(239, 68, 68, 0.14);
+  }
+}
