@@ -7,31 +7,17 @@ const connectDatabase = require('./config/database');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 
 const app = express();
-
-// ============================================
-// MIDDLEWARE CONFIGURATION
-// ============================================
-
-// Body Parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS Configuration
 const corsOptions = {
     origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
     credentials: true,
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
-
-// Mongo Sanitize
 app.use(mongoSanitize());
 
-// ============================================
-// ROUTES
-// ============================================
-
-// Health Check Route
 app.get('/health', (req, res) => {
     res.status(200).json({
         success: true,
@@ -41,24 +27,10 @@ app.get('/health', (req, res) => {
     });
 });
 
-// API Routes (to be added)
-// app.use('/api/v1/auth', require('./routes/auth.routes'));
-// app.use('/api/v1/users', require('./routes/user.routes'));
-// app.use('/api/v1/events', require('./routes/event.routes'));
 
-// ============================================
-// ERROR HANDLING
-// ============================================
-
-// Handle 404 - Route not found
 app.use(notFound);
 
-// Global error handler (must be last)
 app.use(errorHandler);
-
-// ============================================
-// SERVER INITIALIZATION
-// ============================================
 
 const PORT = process.env.PORT || 5000;
 
