@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Role {
+  ADMIN
+  LEAD
+  TRAINER
+}
+
+enum AssignmentStatus {
+  UNASSIGNED
+  REQUESTED
+  ASSIGNED
+  REJECTED
+}
+
+enum NotificationType {
+  NEW_EVENT
+  ASSIGNMENT_REQUEST
+  ASSIGNMENT_RESPONSE
+  DIRECT_ASSIGN
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  password   String
+  role       Role
+  teamCode   String?  @unique // only for leads
+  createdAt  DateTime @default(now())
+
+  eventsAssigned   Event[]       @relation("TrainerEvents")
+  notifications    Notification[]
+}
+
+model Event {
+  id                   Int      @id @default(autoincrement())
+  manikin              String?
+  legacyCode           String?  @unique
+  drName               String?
+  city                 String?
+  state                String?
+  address              String?
+  eventDate            DateTime?
+  eventTime            String?
+  rescheduleDate       DateTime?
+  rescheduleTime       String?
+  approxParticipants   Int?
+  actualParticipants   Int?
+  audienceType         String?
+  liaisoningManager    String?
+  managerMobile        String?
+  managerEmail         String?
+  teamCode             String
+  requirements         String?
+  repAtLocation        String?
+
+  trainerId            Int?
+  trainer              User?    @relation("TrainerEvents", fields: [trainerId], references: [id])
+
+  assignmentStatus     AssignmentStatus @default(UNASSIGNED)
+
+  createdAt            DateTime @default(now())
+
+  notifications        Notification[]
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int?
+  type      NotificationType
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+  event     Event?   @relation(fields: [eventId], references: [id])
+}
